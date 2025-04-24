@@ -4,8 +4,7 @@ from random import choice, randint, shuffle
 import pyperclip
 import json
 
-# ---------------------------- PASSWORD GENERATOR ------------------------------- #
-
+# ----------- PASSWORD GENERATOR -------- #
 #Password Generator Project
 def generate_password():
     letters = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z']
@@ -23,7 +22,7 @@ def generate_password():
     password_entry.insert(0, password)
     pyperclip.copy(password)
 
-# ---------------------------- SAVE PASSWORD ------------------------------- #
+# ------------ SAVE PASSWORD ----------- #
 def save():
 
     website = website_entry.get()
@@ -39,18 +38,18 @@ def save():
     if len(website) == 0 or len(password) == 0:
         messagebox.showinfo(title="Oops", message="Please make sure you haven't left any fields empty.")
     else:
-        with open("data.json", "r") as data_file:
-            data=json.load(data_file)
-            data.update(new_data)
+
 
         with open("data.json", "w") as data_file:
 
-            json.dump(data,data_file,indent=4)
+            json.dump(new_data,data_file)
             website_entry.delete(0, END)
             password_entry.delete(0, END)
 
-
-# ---------------------------- UI SETUP ------------------------------- #
+        with open("data.json","r")as data_file:
+            data=json.load(data_file)
+            data.update(new_data)
+# -------------- UI SETUP -------------- #
 
 window = Tk()
 window.title("Password Manager")
